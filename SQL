@@ -1,0 +1,59 @@
+-- Database: NewDB
+
+-- DROP DATABASE IF EXISTS "NewDB";
+
+CREATE DATABASE "NewDB"
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'English_India.1252'
+    LC_CTYPE = 'English_India.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+	
+	
+CREATE TABLE People(
+    F_Name varchar(25) NOT NULL,
+	L_Name varchar(25) NULL,
+	Ph_NO int NOT NULL UNIQUE,
+	Adhar_Id int Constraint Pri_Key Primary Key,
+	Gender char(1) Constraint Chk_Gen Check(Gender = 'M' or Gender = 'F')
+);
+
+INSERT INTO People
+(F_Name,L_Name,Ph_NO,Adhar_Id,Gender) 
+VALUES
+('Raj', 'Karan',12365789,789,'M'),
+('vijay', 'kumar',78465789,452,'M'),
+('Mohana', 'Priya',78489,472,'F'),
+('Benita', '',78465784,482,'F');
+
+Select * from People;
+
+Select * from People
+order by F_Name;
+
+Select * from People
+order by F_Name DESC;
+
+Select F_name, Adhar_id 
+From People
+Where Gender = 'M';
+
+Select F_name, Adhar_id 
+From People
+Where Gender = 'F';
+
+Select F_name, Adhar_id 
+From People
+Where Gender = '3';
+
+UPDATE People
+SET L_Name = 'Mary'
+WHERE Adhar_id = '482';
+
+DELETE from People
+WHERE Adhar_id = '789'; 
+
+DROP TABLE People;
+truncate table People;

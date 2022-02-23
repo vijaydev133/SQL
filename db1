@@ -1,0 +1,78 @@
+-- Database: MyFirsDBt
+
+-- DROP DATABASE IF EXISTS "MyFirsDBt";
+
+CREATE DATABASE "MyFirsDBt"
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'English_India.1252'
+    LC_CTYPE = 'English_India.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+	
+	
+	
+CREATE TABLE School_Student
+(
+    FirstName varchar(255) NOT NULL,
+    LastName varchar(255),
+    Address varchar(255) NOT NULL,
+    City varchar(255),
+    ID_no int Constraint Prim_Key Primary key
+);
+
+INSERT INTO School_Student(FirstName,LastName,Address,City,ID_no)
+VALUES
+('Vijay','Sankar','550-952 Porttitor Street','tenkasi',1),
+('Raju','kumar','550-952 Porttitor Street','madurai',2),
+('Hema','malini','550-952 Porttitor Street','tenkasi',3),
+('Hari','sri','550-952 Porttitor Street','kanyakumari',4);
+
+Select * from School_Student;
+DROP TABLE School_Student;
+
+CREATE TABLE School
+( 
+	School_ID int  Constraint forn_key References School_Student(ID_no),
+	School_name varchar(255) NOT NULL
+);
+
+INSERT INTO School(School_ID,School_name)
+VALUES
+(1, 'M.K.V.K'),
+(2, 'Kvcc School'),
+(3,'jmms school'),
+(4,'hssrc school');
+
+Select a.FirstName, a.LastName, b.School_name
+FROM School_Student as a 
+inner join School as b
+on a.ID_no = b.School_ID
+WHERE City = 'tenkasi';
+
+
+ALTER TABLE School_Students
+DROP COLUMN ID_no;
+
+ALTER TABLE School_Students
+ADD Reg_no int;
+
+TRUNCATE TABLE School_Students;
+
+ALTER TABLE School_Students RENAME to College_Students;
+
+DROP TABLE College_Students;
+
+CREATE TABLE Person
+(
+	
+	F_Name varchar(25),
+	L_Name varchar(25),
+	Ph_no int NOT NULL UNIQUE, 
+	Age int Constraint Def_Age Default(20),
+	Gender char(1) CONSTRAINT Chk_Gen Check(Gender = 'M' OR Gender = 'F' ),
+	Id_No int Constraint For_Key_Cons References School_Students(ID_no)
+);
+
+drop table Person;
