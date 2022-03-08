@@ -1,0 +1,78 @@
+-- Database: mynewdb
+
+-- DROP DATABASE IF EXISTS mynewdb;
+
+CREATE DATABASE mynewdb
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'English_India.1252'
+    LC_CTYPE = 'English_India.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+	
+	
+CREATE TABLE Employee
+(
+   E_Name varchar(25) NOT NULL,
+   D_Id   int NOT NULL,
+   E_City varchar(25),
+   E_Gender char(1) 
+);
+
+INSERT INTO Employee
+VALUES
+('Vijay',123,'tenkasi','M'),
+('kumar',234,'chennai','M'),
+('Prem',123,'kanyakumari','M'),
+('Raju',456,'madurai','M'),
+('Hema',789,'','F'),
+('Benita',789,'courtallam','')
+;
+SELECT * from Employee
+WHERE E_Name LIKE '%';
+
+
+
+CREATE TABLE Department
+(
+	D_Id int NOT NULL,
+	D_Name varchar(25) NOT NULL
+);
+
+INSERT INTO Department
+VALUES
+(123,'Healthcare'),
+(456,'Finance'),
+(789,'ADM'),
+(101,'DBA');
+
+--inner join
+Select *
+From Employee a inner join Department b
+ON a.D_Id = b.D_Id;
+
+--left join
+Select *
+From Employee a left join Department b
+ON a.D_Id = b.D_Id;
+
+--right join
+Select *
+From Employee a right join Department b
+ON a.D_Id = b.D_Id;
+
+--Full outer join
+Select * 
+From Employee a Full outer join Department b
+ON a.D_Id = b.D_Id;
+
+--Cross join
+Select * 
+From Employee, Department;
+
+SELECT CONCAT (a.d_name, '  ' , b.e_name)
+FROM Department a , Employee b;
+
+
+Drop table Employee;

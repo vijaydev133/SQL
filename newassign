@@ -1,0 +1,19 @@
+SELECT * FROM EMployee;
+
+SELECT Upper(d_name) FROM Department;
+
+SELECT Lower(d_name) FROM Department;
+
+SELECT length(d_name) FROM Department;
+
+SELECT Upper(d_name) FROM Department;
+
+SELECT Reverse(d_name) FROM Department;
+
+SELECT CONCAT ('sankar',' ','vijay');
+
+SELECT
+	CONCAT ('CONCAT',' ', 'function');
+	
+SELECT CONCAT(a.d_name, ' ' , b.e_name)
+FROM Department a , Employee b;

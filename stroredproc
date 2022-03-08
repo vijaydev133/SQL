@@ -1,0 +1,52 @@
+CREATE TABLE Table1
+(
+	reg_no int,
+	Name_ varchar(10)
+);
+CREATE TABLE Table2
+(
+	place varchar(25),
+	Gender varchar(10)
+);
+
+CREATE PROCEDURE insert_data( varchar(25), varchar(10))
+language 'plpgsql'
+AS $$
+
+Begin
+Insert into Table2 (place,Gender)values($1,$2);
+commit;
+End;
+$$;
+
+call insert_data('sivakasi','male');
+
+
+SELECT * FROM Table2;
+
+
+
+CREATE PROCEDURE Select1()
+language 'plpgsql'
+AS $$
+
+Begin
+Select name_ from table1
+where reg_no > 12;
+
+End;
+$$;
+
+
+call Select1();
+
+CREATE VIEW VS AS
+SELECT a.Name_, b.gender FROM table1 a , table2 b;
+
+
+Select * from vs;
+
+
+
+
+
